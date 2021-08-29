@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My first Vue app</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- <template>
+            <el-table-draggable>
+                <el-table row-key></el-table>
+            </el-table-draggable>
+        </template> -->
+
+        <!-- <div>
+            <ul>
+                <li v-for="lab in label">
+                    <h1>
+                        {{lab.title}}
+                    </h1>
+                    <p>
+                        {{lab.body}}
+                        {{lab.id}}
+                    </p>
+                </li>
+            </ul>
+        </div> -->
+
+        <!-- {{ message }} {{ label }} -->
+
+        <table class="table">
+            <thead>
+            </thead>
+            <tbody>
+                <tr v-for="(item, key) in label" :key="key">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.title }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <script>
+        //import ElTableDraggable from 'el-table-draggable'
+
+        // export default {
+        //     components: {
+        //         ElTableDraggable
+        //     }
+        // }
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "Hello Yoga!",
+                label: []
+            }
+        });
+        //        
+        // var axios = require('axios');
+
+        var config = {
+            method: 'get',
+            // url: 'https://ifps-dwi-api-ifpsdemo-eks005.sa.wise-paas.com/categories?parentId=60f687c0c17bc233e15705e4',
+            // url: 'http://localhost:3000/list_movies',
+            url: 'https://jsonplaceholder.typicode.com/posts',
+            headers: {}
+        };
+
+        axios(config)
+            .then(function (response) {
+                app.$data.label = response.data;
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log("list movie error...");
+                console.log(error);
+            });
+
+
+    </script>
+</body>
+
+</html>
